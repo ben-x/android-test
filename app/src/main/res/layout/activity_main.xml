@@ -7,12 +7,89 @@
     tools:context="ng.riby.androidtest.MainActivity">
 
     <Button
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/start"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/margin"
         android:text="@string/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/clear_button"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/latTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/start"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="Latitude: "/>
+
+    <TextView
+        android:id="@+id/lonTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/latTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="Longitude: "/>
+
+
+    <TextView
+        android:id="@+id/latTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="Latitude2: "/>
+
+    <TextView
+        android:id="@+id/lonTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/latTextView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="Longitude2: "/>
+
+    <TextView
+        android:id="@+id/distanceCovered1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lonTextView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin"
+        android:text="DistanceCovered: "/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        app:layout_constraintTop_toBottomOf="@+id/lonTextView"
+        tools:layout_editor_absoluteX="16dp"
+        tools:listitem="@layout/distance_item" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
