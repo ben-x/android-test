@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/setupFragment">
+
+    <fragment
+        android:id="@+id/distancesFragment"
+        android:name="ng.riby.androidtest.ui.fragments.DistancesFragment"
+        android:label="DistancesFragment" >
+        <action
+            android:id="@+id/action_distancesFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="ng.riby.androidtest.ui.fragments.StatisticsFragment"
+        android:label="StatisticsFragment" />
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="ng.riby.androidtest.ui.fragments.SetupFragment"
+        android:label="SetupFragment" >
+        <action
+            android:id="@+id/action_setupFragment_to_distancesFragment"
+            app:destination="@id/distancesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ng.riby.androidtest.ui.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="ng.riby.androidtest.ui.fragments.TrackingFragment"
+        android:label="TrackingFragment" >
+        <action
+            android:id="@+id/action_trackingFragment_to_distancesFragment"
+            app:destination="@id/distancesFragment" />
+    </fragment>
+</navigation>
