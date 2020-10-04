@@ -1,14 +1,17 @@
 package ng.riby.androidtest.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import ng.riby.androidtest.R
 import ng.riby.androidtest.db.DistanceDAO
+import ng.riby.androidtest.others.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import javax.inject.Inject
 
 
@@ -18,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        navigateToTrackingFragmentIfNeeded(intent)
 
         setSupportActionBar(toolBar)
         bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
@@ -32,5 +37,15 @@ class MainActivity : AppCompatActivity() {
                         else -> bottomNavigationView.visibility = View.GONE
                     }
                 }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navigateToTrackingFragmentIfNeeded(intent)
+    }
+    private fun navigateToTrackingFragmentIfNeeded(intent: Intent?){
+        if(intent?.action == ACTION_SHOW_TRACKING_FRAGMENT){
+            navHostFragment.findNavController().navigate(R.id.action_global_tracking_fragment)
+        }
     }
 }
