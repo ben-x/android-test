@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Android Test</string>
     <string name="start">Start</string>
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Duration</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+    </string-array>
+    <string name="google_maps_key">AIzaSyAJDSFo3NnwQ1i5Gq7GpID7ByKxmBn92qs</string>
 </resources>
