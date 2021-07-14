@@ -48,19 +48,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setFragment();
 
+        // referencing views in the XML layout
         latitudeTextView = findViewById(R.id.activity_main_latitude_text_view);
         longitTextView = findViewById(R.id.activity_main_longitude_text_view);
         startButton = findViewById(R.id.activity_main_start_button);
         stopButton = findViewById(R.id.activity_main_stop_button);
         distanceTextView = findViewById(R.id.activity_main_total_distance_text_view);
+
+        // FocusLocationClient object used to get the users Geo-location
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        // start button gets the users location and displays the latitude and longitude
+        // in a text view
         startButton.setOnClickListener(view -> {
             getLastLocation();
         });
 
+        // stop button gets the user last location and with the start location calculates the users
+        // total distance
         stopButton.setOnClickListener(view -> {
             locationCalculation();
         });
@@ -69,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
         userLocationViewModel = ViewModelProviders.of(this).get(UserLocationViewModel.class);
     }
 
+    /**
+     * Checks if Fine location permission is granted
+     * if permission is granted the [FusedLocationProviderClient] object is used to get the users current location
+     * if permission is not granted permission is requested
+     * @returns void
+     */
     @SuppressLint("MissingPermission")
     private void getLastLocation() {
         // check if permissions are given
@@ -109,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Requests for the users new location
+     * and displays the longitude and latitude in a textView
+     */
     @SuppressLint("MissingPermission")
     private void requestNewLocationData() {
 
@@ -137,7 +153,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // method to check for permissions
+    /**
+     * Checks for fine and coarse permission
+     * if permission is not granted, requests for permission
+     * @return Boolean
+     */
     private boolean checkPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
@@ -182,6 +202,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Observes live data in the viewModel
+     * the viewModel live data contains a list of Userlocations to be used for total distance calculation
+     * the total distance is calculated using an algorithm and the result is displayed in a textview
+     */
     private void locationCalculation() {
 
         // Create the observer which updates the UI.
@@ -203,7 +228,13 @@ public class MainActivity extends AppCompatActivity {
         userLocationViewModel.allocations.observe(this, locationObserver);
     }
 
-    public Double CalculationByDistance(UserLocation StartP,UserLocation EndP) {
+    /**
+     * Calculates the total distance using location latitude and longitude
+     * @param StartP - starting position
+     * @param EndP - ending position
+     * @return - the total distance covered
+     */
+    private Double CalculationByDistance(UserLocation StartP,UserLocation EndP) {
         int Radius = 6371;// radius of earth in Km
         double lat1 = StartP.getLatitude();
         double lat2 = EndP.getLongitude();
